@@ -99,7 +99,7 @@ weather-app-react/
 
 ## 📸 Screenshots
 
-![Weather App Screenshot](image.png)
+![Weather App Screenshot](./public/image.png)
 *App showing real-time weather data for a city search*
 
 ## 🚀 Getting Started
