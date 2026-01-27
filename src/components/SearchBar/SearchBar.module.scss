@@ -1,0 +1,47 @@
+@import "src/assets/scss/variables";
+
+.searchContainer {
+  display: flex;
+  gap: 1rem;
+  margin: 2rem auto 0;
+}
+
+.searchInput {
+  width: 100%;
+
+  // Minimalist: Transparent background
+  background: transparent;
+
+  // No rounded corners for minimalist look
+  border-radius: 0;
+
+  // Thin underline only
+  border: none;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+
+  // Smooth transitions
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+  // Hover effect - slight glow on underline
+  &:hover {
+    border-bottom-color: rgba(255, 255, 255, 0.7);
+  }
+
+  // Focus effect - glow and brighter underline
+  &:focus-within {
+    border-bottom-color: rgba(255, 255, 255, 1);
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.3);
+  }
+
+  // Style the input text
+  input {
+    color: white;
+    font-weight: 400;
+    font-size: 1.1rem;
+
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.6);
+      font-weight: 300;
+    }
+  }
+}
