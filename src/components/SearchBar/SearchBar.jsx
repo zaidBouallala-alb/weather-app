@@ -6,8 +6,6 @@ import { resetData, setData, setUnit, setError } from "../../features/weather/We
 import PositionSvg from "../Svgs/PositionSvg";
 
 export const SearchBar = () => {
-    const GEO_API_KEY = process.env.REACT_APP_GEO_API_KEY
-    const WEATHER_API_KEY = process.env.REACT_APP_WEATHER_API
     const dispatch = useDispatch()
     const { unit } = useSelector((state) => state.weather)
     const [cities, setCities] = useState([])
@@ -20,22 +18,28 @@ export const SearchBar = () => {
                 lon: position.coords.longitude,
                 lat: position.coords.latitude,
             })
+        }, (error) => {
+            console.warn('Geolocation error:', error)
+            if (error.code === error.PERMISSION_DENIED) {
+                dispatch(setError("Location permission denied. Please enable it in your browser settings or search for a city."))
+            } else {
+                dispatch(setError("Unable to retrieve location."))
+            }
         })
-    }, [])
+    }, [dispatch])
+
     const getData = useCallback(async () => {
         if (geoLocation) {
             try {
-                const weatherPromise = fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${geoLocation.lat}&units=${unit}&lon=${geoLocation.lon}&appid=${WEATHER_API_KEY}`)
-                const forecastPromise = fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${geoLocation.lat}&units=${unit}&lon=${geoLocation.lon}&appid=${WEATHER_API_KEY}`)
+                // Call our new serverless backend
+                const response = await fetch(`/api/weather?lat=${geoLocation.lat}&lon=${geoLocation.lon}&units=${unit}`)
 
-                const [weatherRes, forecastRes] = await Promise.all([weatherPromise, forecastPromise])
-
-                if (!weatherRes.ok || !forecastRes.ok) {
-                    throw new Error('Failed to fetch weather data')
+                if (!response.ok) {
+                    throw new Error('Failed to fetch weather data from server')
                 }
 
-                const weatherJson = await weatherRes.json()
-                const forecastJson = await forecastRes.json()
+                const data = await response.json()
+                const { weather: weatherJson, forecast: forecastJson } = data
 
                 const { clouds, main, name, sys, weather, wind } = weatherJson
                 const forecast = forecastJson.list
@@ -54,7 +58,7 @@ export const SearchBar = () => {
                 dispatch(setError(error.message))
             }
         }
-    }, [geoLocation, unit, WEATHER_API_KEY, dispatch])
+    }, [geoLocation, unit, dispatch])
 
     useEffect(() => {
         getGeoLocation()
@@ -72,7 +76,8 @@ export const SearchBar = () => {
         }
 
         try {
-            const response = await fetch(`https://api.geoapify.com/v1/geocode/autocomplete?text=${value}&type=city&format=json&apiKey=${GEO_API_KEY}`)
+            // Call our new serverless backend
+            const response = await fetch(`/api/geo?text=${value}`)
             if (!response.ok) {
                 throw new Error('Geocoding API failed')
             }
