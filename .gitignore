@@ -1,28 +1,39 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
 # dependencies
 /node_modules
 /.pnp
 .pnp.js
-.env
-/testsprite_tests
 
 # testing
 /coverage
+/testsprite_tests
 
 # production
 /build
+/dist
 
 # misc
 .DS_Store
+.env
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
 
+# logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-.idea  git rm -r --cached .idea
+*.log
 
+# IDEs
+.idea
+.vscode
+*.swp
+*.swo
 
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Optional
+.eslintcache
