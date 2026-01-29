@@ -1,6 +1,6 @@
 import styles from './SearchBar.module.scss'
 import { Autocomplete, Button, TextField } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { resetData, setData, setUnit, setError } from "../../features/weather/WeatherSlice";
 import PositionSvg from "../Svgs/PositionSvg";
@@ -13,7 +13,7 @@ export const SearchBar = () => {
     const [cities, setCities] = useState([])
     const [geoLocation, setGeoLocation] = useState(undefined)
     const [isCurrentLocation, setIsCurrentLocation] = useState(false)
-    const getGeoLocation = () => {
+    const getGeoLocation = useCallback(() => {
         navigator.geolocation.getCurrentPosition((position) => {
             setIsCurrentLocation(true)
             setGeoLocation({
@@ -21,37 +21,8 @@ export const SearchBar = () => {
                 lat: position.coords.latitude,
             })
         })
-    }
-    useEffect(() => {
-        getGeoLocation()
-    }, []);
-    useEffect(() => {
-        getData()
-    }, [geoLocation, unit]);
-
-    const handleInputChange = async (e) => {
-        const { value } = e.currentTarget
-        if (!value || value.trim().length < 2) {
-            setCities([])
-            return
-        }
-
-        try {
-            const response = await fetch(`https://api.geoapify.com/v1/geocode/autocomplete?text=${value}&type=city&format=json&apiKey=${GEO_API_KEY}`)
-            if (!response.ok) {
-                throw new Error('Geocoding API failed')
-            }
-            const json = await response.json()
-            setCities(json.results?.map(data => {
-                const { lat, lon, city, country, formatted } = data
-                return { lat, lon, city, country, formatted }
-            }) || [])
-        } catch (error) {
-            console.warn('City autocomplete failed:', error.message)
-            setCities([]) // Clear suggestions on error
-        }
-    }
-    const getData = async () => {
+    }, [])
+    const getData = useCallback(async () => {
         if (geoLocation) {
             try {
                 const weatherPromise = fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${geoLocation.lat}&units=${unit}&lon=${geoLocation.lon}&appid=${WEATHER_API_KEY}`)
@@ -82,6 +53,37 @@ export const SearchBar = () => {
             } catch (error) {
                 dispatch(setError(error.message))
             }
+        }
+    }, [geoLocation, unit, WEATHER_API_KEY, dispatch])
+
+    useEffect(() => {
+        getGeoLocation()
+    }, [getGeoLocation]);
+
+    useEffect(() => {
+        getData()
+    }, [getData]);
+
+    const handleInputChange = async (e) => {
+        const { value } = e.currentTarget
+        if (!value || value.trim().length < 2) {
+            setCities([])
+            return
+        }
+
+        try {
+            const response = await fetch(`https://api.geoapify.com/v1/geocode/autocomplete?text=${value}&type=city&format=json&apiKey=${GEO_API_KEY}`)
+            if (!response.ok) {
+                throw new Error('Geocoding API failed')
+            }
+            const json = await response.json()
+            setCities(json.results?.map(data => {
+                const { lat, lon, city, country, formatted } = data
+                return { lat, lon, city, country, formatted }
+            }) || [])
+        } catch (error) {
+            console.warn('City autocomplete failed:', error.message)
+            setCities([]) // Clear suggestions on error
         }
     }
     const handleAutocompleteSelect = (e, value) => {
