@@ -1,8 +1,8 @@
-# 🌤️ Weather App (React)
+#  Weather App (React)
 
 A simple and responsive Weather App built with **React** that allows users to search for real-time weather information for any city using a public weather API.
 
-## 🚀 Features
+##  Features
 
 * Search weather by city name
 * Display current temperature, humidity, wind speed, and weather condition
@@ -11,13 +11,13 @@ A simple and responsive Weather App built with **React** that allows users to se
 * Clean and modern design
 * Built with React functional components & hooks
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 * **Frontend:** React, HTML, CSS, JavaScript, scss
 * **API:** OpenWeatherMap API (or any weather API)
 * **Build Tool:** Vite or Create React App
 
-## 📦 Installation
+##  Installation
 
 1. Clone the repository:
 
@@ -45,7 +45,7 @@ npm run dev
 npm start
 ```
 
-## 🔑 API Setup
+##  API Setup
 
 1. Create a free account on OpenWeatherMap: [https://openweathermap.org/](https://openweathermap.org/)
 2. Get your API key
@@ -69,7 +69,7 @@ const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
 const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
 ```
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 weather-app-react/
@@ -85,24 +85,24 @@ weather-app-react/
 └── vite.config.js
 ```
 
-## 🧪 Example Usage
+##  Example Usage
 
 1. Enter a city name (e.g., `Paris`)
 2. Click **Search**
 3. View real-time weather data
 
-## ⚠️ Error Handling
+##  Error Handling
 
 * Displays a message if the city is not found
 * Handles empty input
 * Handles API connection errors
 
-## 📸 Screenshots
+##  Screenshots
 
 ![Weather App Screenshot](./public/image.png)
 *App showing real-time weather data for a city search*
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### Prerequisites
 - Node.js (v14 or higher)
