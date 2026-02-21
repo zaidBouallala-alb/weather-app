@@ -15,15 +15,21 @@ const initialState = {
     },
     forecast: [],
     error: null,
-    unit: 'metric', // User's preferred unit
-    dataUnit: 'metric', // Unit of the currently displayed data
+    loading: false,
+    unit: 'metric',
+    dataUnit: 'metric',
     isLoaded: false,
+    theme: typeof window !== 'undefined' ? (localStorage.getItem('weather-theme') || 'dark') : 'dark',
 }
 
 export const WeatherSlice = createSlice({
     name: 'weather',
     initialState,
     reducers: {
+        setLoading: (state) => {
+            state.loading = true
+            state.error = null
+        },
         setData: (state, action) => {
             const { clouds, main, name, sys, weather, wind, forecast, dataUnit } = action.payload
             state.clouds = clouds
@@ -35,6 +41,7 @@ export const WeatherSlice = createSlice({
             state.forecast = forecast
             state.dataUnit = dataUnit
             state.isLoaded = true
+            state.loading = false
             state.error = null
         },
         setUnit: (state, action) => {
@@ -42,13 +49,19 @@ export const WeatherSlice = createSlice({
         },
         setError: (state, action) => {
             state.error = action.payload
+            state.loading = false
             state.isLoaded = false
         },
         resetData: (state) => {
             state.isLoaded = false
+            state.loading = false
             state.error = null
+        },
+        toggleTheme: (state) => {
+            state.theme = state.theme === 'dark' ? 'light' : 'dark'
+            localStorage.setItem('weather-theme', state.theme)
         }
     }
 })
-export const { setData, resetData, setUnit, setError } = WeatherSlice.actions
+export const { setLoading, setData, resetData, setUnit, setError, toggleTheme } = WeatherSlice.actions
 export default WeatherSlice.reducer
