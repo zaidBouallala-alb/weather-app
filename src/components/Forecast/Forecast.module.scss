@@ -1,26 +1,111 @@
 .forecastContainer {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1rem;
-    margin-top: 2rem;
+    overflow-x: auto;
+    gap: var(--space-md);
+    padding-bottom: var(--space-sm);
+    width: 100%;
+
+    // Hide scrollbar but keep scroll
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    @media (min-width: 600px) {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        overflow-x: visible;
+    }
+
+    // Desktop: vertical stack
+    @media (min-width: 1024px) {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-sm);
+    }
 }
 
 .forecastCard {
-    background-color: rgba(255, 255, 255, 0.2) !important;
-    backdrop-filter: blur(5px);
-    border: none !important;
-    color: white !important;
-    width: 150px;
+    min-width: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
-    
-    img {
-        width: 50px;
-        height: 50px;
+    cursor: default;
+
+    // Theme-swap + hover transitions
+    transition:
+        background 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        transform 0.2s ease;
+
+    &:hover {
+        background: var(--surface-hover);
+        border-color: var(--accent);
+        box-shadow: var(--shadow-hover);
     }
 
-    .description {
-        font-size: 0.8rem;
-        text-transform: capitalize;
+    &:focus-visible {
+        outline: none;
+        box-shadow: var(--focus-ring);
+        background: var(--surface-hover);
     }
+
+    // Desktop: horizontal row
+    @media (min-width: 1024px) {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: var(--space-sm) var(--space-md);
+        gap: var(--space-md);
+        min-width: unset;
+    }
+}
+
+.day {
+    font-size: var(--text-sm);
+    font-weight: 700;
+    margin-bottom: var(--space-sm);
+    color: var(--text-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+
+    @media (min-width: 1024px) {
+        margin-bottom: 0;
+        min-width: 40px;
+    }
+}
+
+.icon {
+    width: 50px;
+    height: 50px;
+    margin: var(--space-sm) 0;
+    filter: var(--icon-glow);
+    transition: transform var(--transition-fast);
+
+    .forecastCard:hover & {
+        transform: scale(1.1);
+    }
+
+    @media (min-width: 1024px) {
+        width: 36px;
+        height: 36px;
+        margin: 0;
+    }
+}
+
+.temp {
+    font-family: var(--font-mono);
+    font-size: var(--text-lg);
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.desc {
+    font-size: var(--text-xs);
+    color: var(--text-secondary);
+    font-weight: 500;
+    text-transform: capitalize;
 }

@@ -4,10 +4,25 @@ import './style.scss'
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import { Provider } from 'react-redux';
+import { store } from './app/store';
+import { HelmetProvider } from 'react-helmet-async';
+import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
+
+// Apply persisted theme immediately to prevent flash of wrong theme
+const savedTheme = localStorage.getItem('weather-theme') || 'dark';
+document.documentElement.setAttribute('data-theme', savedTheme);
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
-        <App/>
+        <ErrorBoundary>
+            <Provider store={store}>
+                <HelmetProvider>
+                    <App />
+                </HelmetProvider>
+            </Provider>
+        </ErrorBoundary>
     </React.StrictMode>
 );
 
