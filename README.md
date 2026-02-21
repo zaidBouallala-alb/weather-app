@@ -1,23 +1,23 @@
-# 🌤️ Weather App
+# Weather App
 
 A modern, fully responsive weather application built with **React 18** and a **glassmorphism design system**. Features a real-time city search, current weather, 5-day forecast, and a smooth **dark / light theme toggle** with Framer Motion micro-animations.
 
 ---
 
-## ✨ Features
+## Features
 
-- 🔍 **City search** with autocomplete powered by Geoapify
-- 🌡️ **Current weather** — temperature, humidity, wind, pressure, sunrise
-- 📅 **5-day forecast** with staggered entrance animations
-- 🌙 **Dark / Light theme** with smooth crossfade transitions
-- 💀 **Skeleton loading** with shimmer placeholders
-- 📱 **Fully responsive** — mobile, tablet, and desktop
-- ⚠️ **Error boundary** + user-friendly error states
-- ♿ **Keyboard navigable** with visible focus rings
+- City search with autocomplete powered by Geoapify
+- Current weather — temperature, humidity, wind, pressure, sunrise
+- 5-day forecast with staggered entrance animations
+- Dark / Light theme with smooth crossfade transitions
+- Skeleton loading with shimmer placeholders
+- Fully responsive — mobile, tablet, and desktop
+- Error boundary + user-friendly error states
+- Keyboard navigable with visible focus rings
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 | Layer | Technology |
 |---|---|
@@ -33,7 +33,7 @@ A modern, fully responsive weather application built with **React 18** and a **g
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 weather-app/
@@ -66,7 +66,7 @@ weather-app/
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 - Node.js v16+
@@ -91,7 +91,7 @@ npm start
 
 ---
 
-## 🔑 API Setup
+## API Setup
 
 This app requires two free API keys:
 
@@ -109,11 +109,11 @@ REACT_APP_WEATHER_API_KEY=your_openweathermap_key_here
 REACT_APP_GEO_API_KEY=your_geoapify_key_here
 ```
 
-> ⚠️ Never commit your `.env` file. It is already in `.gitignore`.
+> Never commit your `.env` file. It is already in `.gitignore`.
 
 ---
 
-## 🎨 Theme System
+## Theme System
 
 The app ships with a **Soft Neutral Light Mode** and a **Deep Blue Dark Mode**, implemented via CSS custom properties on `[data-theme]`:
 
@@ -128,7 +128,7 @@ Theme is stored in Redux and persisted to `localStorage`.
 
 ---
 
-## 📦 Scripts
+## Scripts
 
 ```bash
 npm start        # Start development server (port 3000)
@@ -139,6 +139,6 @@ npm run deploy   # Deploy to GitHub Pages
 
 ---
 
-## 📄 License
+## License
 
 MIT — feel free to use and adapt.
