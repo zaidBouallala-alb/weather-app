@@ -1,54 +1,195 @@
-@import "src/assets/scss/variables";
-
-div.container {
+.container {
+  width: 100%;
   display: flex;
-  text-align: center;
-  background-color: rgba(255, 255, 255, 0.3);
-  margin-top: 1rem;
-  color: white;
-}
-
-.weather_infos {
-  display: flex;
-  align-items: center;
   flex-direction: column;
-  justify-content: space-evenly;
+  gap: var(--space-lg);
 }
 
-.date {
+.header {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 0.8rem;
-  margin-top: 0.5rem;
-  opacity: 0.6;
-  gap: $weather-infos-gap;
-}
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
 
-.temperature {
-  display: flex;
-  font-size: 3rem;
-}
+  h1 {
+    font-size: var(--text-2xl);
+    font-weight: 700;
+    margin-bottom: var(--space-xs);
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    color: var(--text-primary);
 
-.infos {
-  margin-top: 2rem;
-  margin-bottom: 1rem;
-  display: flex;
-  font-size: 0.8rem;
-  width: 45vw;
-  padding: 1rem 0.5rem;
-  border-radius: 25px;
-  justify-content: center;
-  background-color: rgba(0, 0, 0, 0.3);
-  gap: calc($weather-infos-gap + 10%);
-
-  .border_right {
-    border-right: 3px solid rgba(255, 255, 255, 0.2);
-    padding-right: 1.2rem;
+    @media (max-width: 480px) {
+      font-size: var(--text-xl);
+    }
   }
 }
 
-.separator {
-  margin-top: 2rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.5);
+.date {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  font-weight: 500;
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+
+  div {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+  }
+}
+
+.mainWeather {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xl);
+  padding: var(--space-lg) 0;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+}
+
+.iconContainer {
+  filter: var(--icon-glow);
+  transition: filter var(--transition-base);
+}
+
+.temperature {
+  font-family: var(--font-mono);
+  font-size: var(--text-hero);
+  font-weight: 700;
+  line-height: 1;
+  display: flex;
+  align-items: flex-start;
+  letter-spacing: -2px;
+  color: var(--text-primary);
+
+  @media (max-width: 480px) {
+    font-size: 3.5rem;
+  }
+
+  span {
+    font-family: var(--font-sans);
+    font-size: var(--text-xl);
+    margin-top: var(--space-sm);
+    font-weight: 400;
+    color: var(--text-secondary);
+  }
+}
+
+.detailsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  gap: var(--space-md);
+  margin-top: var(--space-md);
+  background: var(--surface-inset);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.detailItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-xs);
+
+  .label {
+    font-size: var(--text-xs);
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 600;
+  }
+
+  .value {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: var(--text-lg);
+    color: var(--text-primary);
+  }
+}
+
+.message {
+  text-align: center;
+  font-size: var(--text-lg);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--text-secondary);
+}
+
+// ── Skeleton Loading Styles ──
+
+@keyframes shimmer {
+  0% {
+    opacity: 0.4;
+  }
+
+  50% {
+    opacity: 0.8;
+  }
+
+  100% {
+    opacity: 0.4;
+  }
+}
+
+.skeletonLine {
+  background: var(--skeleton-bg);
+  border-radius: var(--radius-sm);
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+.skeletonCircle {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: var(--skeleton-bg);
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+.skeletonCircleSm {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--skeleton-bg);
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+.skeletonHeader {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.skeletonMain {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xl);
+  padding: var(--space-lg) 0;
+}
+
+.skeletonGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  gap: var(--space-md);
+  background: var(--surface-inset);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+}
+
+.skeletonGridItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
 }
