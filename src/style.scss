@@ -65,6 +65,11 @@
 
   --skeleton-bg: rgba(255, 255, 255, 0.12);
 
+  // ── Metric-specific tokens ──
+  --metric-icon: #94A3B8;
+  --metric-label: #64748B;
+  --metric-bg: rgba(0, 0, 0, 0.2);
+
   --error-bg: rgba(239, 68, 68, 0.15);
   --error-border: rgba(239, 68, 68, 0.4);
   --error-text: #FCA5A5;
@@ -111,6 +116,12 @@
   --icon-glow: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.18));
 
   --skeleton-bg: rgba(0, 0, 0, 0.08);
+
+  // ── Metric-specific tokens (light) ──
+  // Icons need bold fill to be visible at 24px on light surfaces
+  --metric-icon: #2D3748;
+  --metric-label: #3B4252;
+  --metric-bg: rgba(0, 0, 0, 0.06);
 
   --error-bg: rgba(220, 38, 38, 0.08);
   --error-border: rgba(220, 38, 38, 0.30);

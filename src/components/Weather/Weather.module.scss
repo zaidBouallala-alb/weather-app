@@ -88,7 +88,7 @@
   grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
   gap: var(--space-md);
   margin-top: var(--space-md);
-  background: var(--surface-inset);
+  background: var(--metric-bg);
   border: 1px solid var(--surface-border);
   border-radius: var(--radius-md);
   padding: var(--space-md);
@@ -104,7 +104,7 @@
 
   .label {
     font-size: var(--text-xs);
-    color: var(--text-tertiary);
+    color: var(--metric-label);
     text-transform: uppercase;
     letter-spacing: 1.5px;
     font-weight: 600;
