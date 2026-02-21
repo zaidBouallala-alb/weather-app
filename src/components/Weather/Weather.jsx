@@ -181,31 +181,31 @@ export const Weather = () => {
                                 animate="animate"
                             >
                                 <motion.div className={styles.detailItem} variants={fadeItem}>
-                                    <DefaultWeather color={'var(--text-secondary)'} width="24px" height="24px" />
+                                    <DefaultWeather color={'var(--metric-icon)'} width="24px" height="24px" />
                                     <span className={styles.label}>Sunrise</span>
                                     <span className={styles.value}>
                                         {formatTime(weather.sys.sunrise)}
                                     </span>
                                 </motion.div>
                                 <motion.div className={styles.detailItem} variants={fadeItem}>
-                                    <Wind color={'var(--text-secondary)'} width="24px" height="24px" />
+                                    <Wind color={'var(--metric-icon)'} width="24px" height="24px" />
                                     <span className={styles.label}>Wind</span>
                                     <span className={styles.value}>
                                         {weather.wind.speed} {weather.dataUnit === 'metric' ? 'm/s' : 'mph'}
                                     </span>
                                 </motion.div>
                                 <motion.div className={styles.detailItem} variants={fadeItem}>
-                                    <SpeedoMeter color={'var(--text-secondary)'} width="24px" height="24px" />
+                                    <SpeedoMeter color={'var(--metric-icon)'} width="24px" height="24px" />
                                     <span className={styles.label}>Pressure</span>
                                     <span className={styles.value}>{weather.main.pressure} hPa</span>
                                 </motion.div>
                                 <motion.div className={styles.detailItem} variants={fadeItem}>
-                                    <Humidity color={'var(--text-secondary)'} width="24px" height="24px" />
+                                    <Humidity color={'var(--metric-icon)'} width="24px" height="24px" />
                                     <span className={styles.label}>Humidity</span>
                                     <span className={styles.value}>{weather.main.humidity}%</span>
                                 </motion.div>
                                 <motion.div className={styles.detailItem} variants={fadeItem}>
-                                    <Thermometer color={'var(--text-secondary)'} width="24px" height="24px" />
+                                    <Thermometer color={'var(--metric-icon)'} width="24px" height="24px" />
                                     <span className={styles.label}>Max</span>
                                     <span className={styles.value}>
                                         {Math.round(weather.main.temp_max)}°
