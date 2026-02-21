@@ -69,7 +69,7 @@ const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
 const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
 ```
 
-##  Project Structure
+## Project Structure
 
 ```
 weather-app-react/
