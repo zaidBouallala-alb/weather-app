@@ -1,6 +1,216 @@
-$theme-colors: (
-        'primary': #0050C8,
-        'danger': #EA2D67,
-        'info': #63BAAA
-);
-@import 'bootstrap/scss/bootstrap';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap');
+
+// ============================================
+// DESIGN SYSTEM — Single source of truth
+// ============================================
+
+:root {
+  // ── Typography ──
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.5rem;
+  --text-2xl: 2rem;
+  --text-hero: 4.5rem;
+
+  // ── Spacing ──
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+
+  // ── Radii ──
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
+
+  // ── Transitions ──
+  --transition-fast: 0.15s ease;
+  --transition-base: 0.3s ease;
+  --transition-slow: 0.5s ease;
+
+  // ── Dark Theme (default) ──
+  --bg-start: #0B1120;
+  --bg-mid: #162032;
+  --bg-end: #1B3A4B;
+  --bg-gradient: linear-gradient(135deg, var(--bg-start) 0%, var(--bg-mid) 50%, var(--bg-end) 100%);
+
+  --surface: rgba(255, 255, 255, 0.08);
+  --surface-hover: rgba(255, 255, 255, 0.14);
+  --surface-border: rgba(255, 255, 255, 0.12);
+  --surface-inset: rgba(0, 0, 0, 0.2);
+
+  --accent: #38BDF8;
+  --accent-hover: #7DD3FC;
+  --accent-secondary: #FACC15;
+
+  --text-primary: #F1F5F9;
+  --text-secondary: #94A3B8;
+  --text-tertiary: #64748B;
+
+  --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-hover: 0 12px 40px rgba(0, 0, 0, 0.5);
+  --focus-ring: 0 0 0 3px rgba(56, 189, 248, 0.5);
+
+  --backdrop-blur: blur(12px);
+  --icon-glow: drop-shadow(0 0 10px rgba(56, 189, 248, 0.3));
+
+  --skeleton-bg: rgba(255, 255, 255, 0.12);
+
+  --error-bg: rgba(239, 68, 68, 0.15);
+  --error-border: rgba(239, 68, 68, 0.4);
+  --error-text: #FCA5A5;
+}
+
+// ── Soft Neutral Light Theme ──
+// Design goals:
+//   1. Background is a cool slate (not pale white) so cards have real contrast
+//   2. Surfaces use warm off-white (not pure white) → no glare, subtle warmth
+//   3. Borders are solid neutral-gray, clearly visible
+//   4. Shadows are multi-layered for subtle depth
+//   5. Text uses near-black (#1a1a2e) primaries and dark slate secondaries
+//   6. Icons use a dark ink-toned glow instead of washing out
+
+[data-theme='light'] {
+  // Cooler, medium-gray gradient — makes white-ish cards stand out
+  --bg-start: #B8C4D0;
+  --bg-mid: #A8B8C8;
+  --bg-end: #9CADC0;
+  --bg-gradient: linear-gradient(135deg, var(--bg-start) 0%, var(--bg-mid) 50%, var(--bg-end) 100%);
+
+  // Off-white with a warm tint — NOT pure white, NOT transparent enough to wash out
+  --surface: rgba(248, 246, 243, 0.88);
+  --surface-hover: rgba(255, 253, 250, 0.95);
+  --surface-border: rgba(80, 90, 110, 0.28);
+  --surface-inset: rgba(0, 0, 0, 0.05);
+
+  --accent: #0C5D94;
+  --accent-hover: #0B7CC1;
+  --accent-secondary: #A3630A;
+
+  // Near-black primaries → strong heading/body contrast
+  --text-primary: #1A1A2E;
+  --text-secondary: #3B4252;
+  --text-tertiary: #555E6E;
+
+  // Multi-layer shadows for clear card edges + depth
+  --shadow: 0 2px 6px rgba(0, 0, 0, 0.08), 0 8px 24px rgba(0, 0, 0, 0.10);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06), 0 4px 12px rgba(0, 0, 0, 0.06);
+  --shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.10), 0 16px 40px rgba(0, 0, 0, 0.12);
+  --focus-ring: 0 0 0 3px rgba(12, 93, 148, 0.35);
+
+  --backdrop-blur: blur(18px);
+  --icon-glow: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.18));
+
+  --skeleton-bg: rgba(0, 0, 0, 0.08);
+
+  --error-bg: rgba(220, 38, 38, 0.08);
+  --error-border: rgba(220, 38, 38, 0.30);
+  --error-text: #991B1B;
+}
+
+// ============================================
+// RESET & BASE
+// ============================================
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  background: var(--bg-gradient);
+  background-attachment: fixed;
+  min-height: 100vh;
+
+  // Smooth theme swap
+  transition: background 0.35s ease, color 0.25s ease;
+}
+
+// ============================================
+// SCROLLBAR
+// ============================================
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--text-tertiary);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+// ============================================
+// UTILITY CLASSES
+// ============================================
+
+.glass-panel {
+  background: var(--surface);
+  backdrop-filter: var(--backdrop-blur);
+  -webkit-backdrop-filter: var(--backdrop-blur);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--surface-border);
+  box-shadow: var(--shadow);
+  padding: var(--space-md);
+  color: var(--text-primary);
+
+  // Smooth theme-swap transition
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    color 0.25s ease;
+}
+
+.glass-panel-interactive {
+  @extend .glass-panel;
+  cursor: pointer;
+
+  &:hover {
+    background: var(--surface-hover);
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover), 0 0 0 1px var(--accent);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+  }
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.grid-responsive {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: var(--space-md);
+}
