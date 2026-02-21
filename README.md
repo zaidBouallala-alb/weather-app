@@ -1,126 +1,144 @@
-#  Weather App (React)
+# 🌤️ Weather App
 
-A simple and responsive Weather App built with **React** that allows users to search for real-time weather information for any city using a public weather API.
+A modern, fully responsive weather application built with **React 18** and a **glassmorphism design system**. Features a real-time city search, current weather, 5-day forecast, and a smooth **dark / light theme toggle** with Framer Motion micro-animations.
 
-##  Features
+---
 
-* Search weather by city name
-* Display current temperature, humidity, wind speed, and weather condition
-* Responsive UI (mobile & desktop friendly)
-* Error handling for invalid city names
-* Clean and modern design
-* Built with React functional components & hooks
+## ✨ Features
 
-##  Tech Stack
+- 🔍 **City search** with autocomplete powered by Geoapify
+- 🌡️ **Current weather** — temperature, humidity, wind, pressure, sunrise
+- 📅 **5-day forecast** with staggered entrance animations
+- 🌙 **Dark / Light theme** with smooth crossfade transitions
+- 💀 **Skeleton loading** with shimmer placeholders
+- 📱 **Fully responsive** — mobile, tablet, and desktop
+- ⚠️ **Error boundary** + user-friendly error states
+- ♿ **Keyboard navigable** with visible focus rings
 
-* **Frontend:** React, HTML, CSS, JavaScript, scss
-* **API:** OpenWeatherMap API (or any weather API)
-* **Build Tool:** Vite or Create React App
+---
 
-##  Installation
+## 🛠️ Tech Stack
 
-1. Clone the repository:
+| Layer | Technology |
+|---|---|
+| Framework | React 18 (Create React App) |
+| State | Redux Toolkit |
+| UI Components | MUI v5 (Material UI) |
+| Animations | Framer Motion |
+| Styling | SCSS Modules + CSS Variables |
+| Weather API | OpenWeatherMap |
+| Geocoding API | Geoapify |
+| SEO | react-helmet-async |
+| Deployment | GitHub Pages (`gh-pages`) |
 
-```bash
-git clone https://github.com/zaidbouallala-alb/weather-app-react.git
+---
+
+## 📁 Project Structure
+
+```
+weather-app/
+├── public/
+│   └── index.html
+├── src/
+│   ├── components/
+│   │   ├── ErrorBoundary/
+│   │   ├── Forecast/          # 5-day forecast cards
+│   │   ├── SearchBar/         # Autocomplete search
+│   │   ├── SEO/               # Meta tags
+│   │   ├── Svgs/              # Weather & metric icons
+│   │   ├── ThemeToggle/       # Dark/light switcher
+│   │   └── Weather/           # Current weather card
+│   ├── features/
+│   │   └── weather/
+│   │       └── WeatherSlice.js  # Redux state
+│   ├── services/
+│   │   ├── geocodingApi.js    # Geoapify calls
+│   │   └── weatherApi.js      # OpenWeatherMap calls
+│   ├── utils/
+│   │   └── dateFormat.js      # Intl.DateTimeFormat helpers
+│   ├── App.jsx
+│   ├── App.module.scss
+│   ├── index.js
+│   └── style.scss             # Global design tokens & themes
+├── .env                        # API keys (not committed)
+└── package.json
 ```
 
-2. Navigate to the project folder:
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js v16+
+- npm or yarn
+
+### Installation
 
 ```bash
-cd weather-app-react
-```
+# 1. Clone the repo
+git clone https://github.com/zaidBouallala-alb/weather-app.git
+cd weather-app
 
-3. Install dependencies:
-
-```bash
+# 2. Install dependencies
 npm install
-```
 
-4. Start the development server:
+# 3. Create .env file
+cp .env.example .env
 
-```bash
-npm run dev
-# or
+# 4. Start the dev server
 npm start
 ```
 
-##  API Setup
+---
 
-1. Create a free account on OpenWeatherMap: [https://openweathermap.org/](https://openweathermap.org/)
-2. Get your API key
-3. Create a `.env` file in the root directory and add:
+## 🔑 API Setup
 
+This app requires two free API keys:
+
+### OpenWeatherMap (weather data)
+1. Sign up at [openweathermap.org](https://openweathermap.org/)
+2. Get your API key from the dashboard
+
+### Geoapify (city autocomplete)
+1. Sign up at [geoapify.com](https://www.geoapify.com/)
+2. Create a project and get your API key
+
+### `.env` file
 ```env
-VITE_WEATHER_API_KEY=YOUR_API_KEY
+REACT_APP_WEATHER_API_KEY=your_openweathermap_key_here
+REACT_APP_GEO_API_KEY=your_geoapify_key_here
 ```
 
-> If you're using Create React App:
+> ⚠️ Never commit your `.env` file. It is already in `.gitignore`.
 
-```env
-REACT_APP_WEATHER_API_KEY=YOUR_API_KEY
-```
+---
 
-4. In your React code:
+## 🎨 Theme System
 
-```js
-const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
-// or
-const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
-```
+The app ships with a **Soft Neutral Light Mode** and a **Deep Blue Dark Mode**, implemented via CSS custom properties on `[data-theme]`:
 
-## Project Structure
+| Token | Dark | Light |
+|---|---|---|
+| `--bg-start` | `#0B1120` | `#B8C4D0` |
+| `--surface` | `rgba(255,255,255,0.08)` | `rgba(248,246,243,0.88)` |
+| `--text-primary` | `#F1F5F9` | `#1A1A2E` |
+| `--metric-icon` | `#94A3B8` | `#2D3748` |
 
-```
-weather-app-react/
-├── src/
-│   ├── components/
-│   ├── pages/
-│   ├── services/
-│   ├── App.jsx
-│   └── main.jsx
-├── public/
-├── .env
-├── package.json
-└── vite.config.js
-```
+Theme is stored in Redux and persisted to `localStorage`.
 
-##  Example Usage
+---
 
-1. Enter a city name (e.g., `Paris`)
-2. Click **Search**
-3. View real-time weather data
+## 📦 Scripts
 
-##  Error Handling
-
-* Displays a message if the city is not found
-* Handles empty input
-* Handles API connection errors
-
-##  Screenshots
-
-![Weather App Screenshot](./public/image.png)
-*App showing real-time weather data for a city search*
-
-##  Getting Started
-
-### Prerequisites
-- Node.js (v14 or higher)
-- npm or yarn package manager
-
-### Quick Setup
 ```bash
-# 1. Clone repo
-git clone https://github.com/zaidbouallala-alb/weather-app-react.git
-
-# 2. Install dependencies
-cd weather-app-react
-npm install
-
-# 3. Setup API key
-# Create .env file and add your OpenWeatherMap API key
-
-# 4. Run development server
-npm run dev
+npm start        # Start development server (port 3000)
+npm run build    # Production build
+npm test         # Run tests
+npm run deploy   # Deploy to GitHub Pages
 ```
 
+---
+
+## 📄 License
+
+MIT — feel free to use and adapt.
