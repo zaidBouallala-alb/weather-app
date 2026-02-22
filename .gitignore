@@ -39,7 +39,7 @@ lerna-debug.log*
 *.tsbuildinfo
 
 # ── IDEs & Editors ─────────────────────────────
-.idea/
+/.idea
 .vscode/
 *.suo
 *.ntvs*
