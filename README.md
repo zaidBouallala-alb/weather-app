@@ -76,7 +76,7 @@ weather-app/
 
 ```bash
 # 1. Clone the repo
-git clone https://github.com/zaidBouallala-alb/weather-app.git
+git clone https://github.com/zaidBouallala/weather-app.git
 cd weather-app
 
 # 2. Install dependencies
