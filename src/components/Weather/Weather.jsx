@@ -14,6 +14,7 @@ import Rainy from "../Svgs/Rainy";
 import Windy from "../Svgs/Windy";
 import { formatFullDateTime, formatTime } from "../../utils/dateFormat";
 import { motion, AnimatePresence } from "framer-motion";
+import React from "react";
 
 // Maps OWM icon codes (first 2 chars) to custom SVG components
 const ICON_SIZE = { width: '120px', height: '120px' };
@@ -52,13 +53,15 @@ const fadeItem = {
 };
 
 // Skeleton shimmer for loading state
-const WeatherSkeleton = () => (
+const WeatherSkeleton = React.forwardRef((props, ref) => (
     <motion.div
+        ref={ref}
         className={`${styles.container} glass-panel`}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.25 }}
+        {...props}
     >
         <div className={styles.skeletonHeader}>
             <div className={styles.skeletonLine} style={{ width: '60%', height: '2rem' }} />
@@ -79,7 +82,7 @@ const WeatherSkeleton = () => (
             ))}
         </div>
     </motion.div>
-);
+));
 
 export const Weather = () => {
     const weather = useSelector((state) => state.weather)
